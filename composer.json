@@ -1,0 +1,13 @@
+{
+    "name": "vendor/blog",
+    "description": "create a proffesionel blog with php",
+    "authors": [
+        {
+            "name": "Samir",
+            "email": "allabsamir777@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "2.0"
+    }
+}
