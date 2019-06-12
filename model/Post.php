@@ -1,15 +1,11 @@
 <?php
 class Post{
-private $_id;
-private $_title;
-private $_content;
-private $_date;
-private $_category_id;
-private $_author_id;
 
- public function __construct()
-{
-
-}
-
+    public function getURL(){
+        return 'index.php?post&id='.$this->id;
+    }
+    public function getExtrait(){
+        $html = '<p>' . $this->content .'</p>';
+        $html .= '<p><a href="' .$this->getURL().'"> plus de détail</a></p>';
+    }
 }

@@ -1,0 +1,32 @@
+{% extends 'layout.twig' %}
+{% block nav %}{% endblock %}
+
+
+
+
+        {% block content %}
+        
+        <div class="container"></div>
+        <h1>les derniers article</h1>
+        <div class="row">
+            {% for post in posts %}
+            
+            <div class="col-md-4">
+                <div class="card">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-block">
+                        <h4 class="card-title">{{ post.title | e }}{{ loop.index }}</h4>
+                        <p class="card-text">{{ post.chapo }}</p>
+                        <a href="index.php?p=postdetail&amp;id="{{ post.id_post }}>plus de détail</a>
+                    </div>
+                </div>
+            </div>
+       {% if loop.index % 3 == 0 %}
+       
+        </div><div class="row">
+       {% endif %}
+       {% endfor %}
+</div>
+       {% endblock %}
+        
+

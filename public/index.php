@@ -1,22 +1,17 @@
 <?php
 require_once '../vendor/autoload.php';
-// routing
-$page = 'home';
-if(isset($_GET['p'])){
-    $page = $_GET['p'];
-}
-//rendu  du template
-//require_once 'vendor/autoload.php';
-// on va charger un nouveau loader on lui précisant le chemin où se trouve notre template
+require '../controler/PostControler.php';
 
+// routing
 $loader = new Twig_Loader_Filesystem('../views'); 
-//une fois le loader est chargé on peut initialiser twig, cette objet prend deux paramettres
-//le premier on le loaoder, en deuziéme paramettre on a une table d'option, 
 $twig = new Twig_Environment($loader, [
     'cache' => false,//__DIR__ . '/tmp',
 ]);
 
-
+$page = 'home';
+if(isset($_GET['p'])){
+    $page = $_GET['p'];
+}
 switch($page){
     case 'home' :
         echo $twig->render('home.twig',['title' => 'Page d\'acueil']);
@@ -25,8 +20,18 @@ switch($page){
         echo $twig->render('contact.twig',['title' => 'Page contact']);
         break;
     case 'posts' :
-        echo $twig->render('viewPosts.twig',['title' => 'Articles']);
+        $getPosts = new PostControler;
+        echo $twig->render('posts.twig',[
+            'title' => 'Articles',
+            'posts' => $getPosts->getListPosts()
+        
+        
+        ]);
         break;
+    case 'postdetail':
+            echo $twig->render('viewPost.twig',['title' => 'détail d\'article']);
+            break;
+    
     case 'connexion' :
         echo $twig->render('login.twig',['title' => 'Connexion']);
         break;
@@ -38,6 +43,9 @@ switch($page){
         echo $twig->render('404.twig');
         break;
 }
+
+
+
 
     
 
