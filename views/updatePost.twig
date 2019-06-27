@@ -1,0 +1,9 @@
+{% extends "accountTemplate.twig" %}
+    {% block content %}
+    {% if message %}
+    <p class="alert alert-{{ type }}">{{ message }}</p>
+    {% endif %}
+    {% endblock %}
+    
+        
+   

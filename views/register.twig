@@ -1,0 +1,47 @@
+
+{% extends 'layout.twig' %}
+
+{% block content %}
+<div class="row h-100 align-items-center text-center d-flex justify-content-around">
+  
+  
+  <form class="form-signin form-controller" action="index.php" method="post">
+      {% if errors is not empty %}
+      <div class="alert alert-danger"><p>vous devrier renseigner les informations suivante ! </p><hr>
+      {% for error in errors %}
+      <span class="text-secondary">{{ error }};&nbsp;</span> 
+      {% endfor %}
+      </div>
+      {% elseif success is not empty %}
+      <div class="alert alert-success">
+          <p>vous vous êtes bien inscrit, vous devriez attendre la validation de votre compte par un administrateur !</p><hr>
+      </div>
+      {% endif %}
+
+    <div class="form-group">
+      <label class="d-block text-left" for="username">Pseudo</label>
+      <input type="text" name="username" class="form-control" id="username" placeholder="pseudo">
+      <small id="passwordHelp" class="form-text text-muted">le psuedo doit contenir au moins 6 caractère(lettres et/ou chifres ) sans espace</small>
+    </div>
+    <div class="form-group">
+      <label class="d-block text-left" for="password">Mot de passe</label>
+      <input type="password" name="password" class="form-control" id="password" placeholder="mot de passe">
+    </div>
+    <div class="form-group">
+      <label class="d-block text-left" for="password_confirmation">confirmez votre mot de passe</label>
+      <input type="password" name="pasword_confirmation" class="form-control" id="password" placeholder="confirmez le mot de passe">
+    </div>
+    <div class="form-group">
+      <label class="d-block text-left" for="email">votre adresse mail</label>
+      <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="votre email">
+      <small id="emailHelp" class="form-text text-muted">tappez une adresse mail comme Julydump@domain.com</small>
+    </div>
+    <input type="hidden" name="p" value="register">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">S'inscrire</button>
+    
+    
+  </div>
+  
+  
+</div>
+{% endblock %}

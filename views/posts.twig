@@ -1,32 +1,55 @@
 {% extends 'layout.twig' %}
-{% block nav %}{% endblock %}
+{% block Breadcrumb %}<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="../public/index.php?p=home">Accueil</a></li>
+      <li class="breadcrumb-item active" aria-current="page">liste d'arcitcles</li>
+    </ol>
+  </nav>{% endblock %}
 
 
 
 
-        {% block content %}
-        
-        <div class="container"></div>
-        <h1>les derniers article</h1>
-        <div class="row">
-            {% for post in posts %}
-            
-            <div class="col-md-4">
-                <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-block">
-                        <h4 class="card-title">{{ post.title | e }}{{ loop.index }}</h4>
-                        <p class="card-text">{{ post.chapo }}</p>
-                        <a href="index.php?p=postdetail&amp;id="{{ post.id_post }}>plus de détail</a>
-                    </div>
-                </div>
+{% block content %}
+
+<div class="container"></div>
+<h1 class="ml-3">les derniers article</h1>
+<div class="row p-3">
+    {% for post in posts %}
+    
+    <div class="col-md-4 mt-3">
+        <div class="card">
+            <img src="../public/img/portfolio/fullsize/{{ loop.index }}.jpg" class="card-img-top mb-3" alt="...">
+            <div class="card-block">
+                <h4 class="card-title">{{ post.title | e }}{{ loop.index }}</h4>
+                <p>mis à jour le :{{ post.update_date }}</p>
+                <p class="card-text">{{ post.chapo }}</p>
+                <a class="btn btn-primary" href="index.php?p=post&amp;id={{ post.post_id }} role="button">plus de détail</a>
             </div>
-       {% if loop.index % 3 == 0 %}
-       
-        </div><div class="row">
-       {% endif %}
-       {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+   
 </div>
-       {% endblock %}
-        
+{% endblock %}
+{% block pagination %}
+<div class="row justify-content-center mt-5">
+    
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+   
+</div>
+{% endblock %}
+{% block footer %} 
+{{ parent() }}
+{% endblock %}
+
+
+
 

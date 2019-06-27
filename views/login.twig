@@ -1,25 +1,39 @@
 
 {% extends 'layout.twig' %}
 
-{%block content %}
-
- 
-
-<div class="row h-100 align-items-center text-center d-flex justify-content-around">
-        <form class="form-signin">
+{% block content %}
+  
+   
+  <div class="row h-100 align-items-center text-center d-flex justify-content-around">
       
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    
+    <form class="form-signin form-controller" action="index.php?p=connexion" method="post">
+          
+      {% if message %}
+        <p class="alert alert-{{ type }}">{{ message }}</p>
+      {% endif %}
+      {% if type == "danger" or type =="info" %}
+      <div class="form-group">
+        <label class="d-block text-left" for="email">votre adresse mail</label>
+        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="votre email">
+        <small id="emailHelp" class="form-text text-muted">tappez une adresse mail comme Julydump@domain.com</small>
+      </div>
+      <div class="form-group">
+        <label class="d-block text-left" for="password">Mot de passe</label>
+        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+        <small id="passwordHelp" class="form-text text-muted">le mot de passe peut contenir des chifres et des lettres</small>
+      </div>
       <div class="checkbox mb-3">
         <label>
-          <input type="checkbox" value="remember-me"> Remember me
+          <input type="checkbox" value="remember-me"> se souvenir de moi
         </label>
+        <a href="index.php?p=register">s'inscrire</a>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">connecter</button>
+      
     </form>
-</div>
+    {% endif %}
+    
+  </div>
+  
 {% endblock %}

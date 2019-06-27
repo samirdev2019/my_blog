@@ -1,0 +1,68 @@
+{% block header %}
+{% include "header.php" %}
+{% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark top-fixed"  id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <img src="../public/img/mypic{{session.user_id}}.png" class="figure-img img-fluid rounded-circle" style="width:50px;" alt="photo">
+            {{session.username}}</a>
+            <a href="#f"><i class="fa fa-facebook mr-4 " aria-hidden="true"></i></a>
+            <a href="#t"><i class="fa fa-twitter mr-4 " aria-hidden="true"></i></a>
+            <a href="#t"><i class="fa fa-github mr-4 " aria-hidden="true"></i></a>
+            <a href="#t"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="../public/index.php?p=home"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Acceuil</a>
+                    </li>
+                    {# <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="../public/index.php?p=home#about">Qui suis-je?</a>
+                    </li> #}
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="../public/index.php?p=posts"><i class="fa fa-clipboard" aria-hidden="true"></i>&nbsp;Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="../public/index.php?p=home#contact"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="../public/index.php?p=logout"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;déconneter</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    {% endblock %}
+    {% block headSection %}
+    <div class="row   text-center d-flex justify-content-around mb-5 ">
+        {# align-items-center #}
+        <div class="col-md-8 my-5">
+            {% endblock %}
+            {% block content %}
+            
+            {% endblock %}
+            {% block sidebar %}
+        </div>
+        <div class="col-md-3 mt-5">
+            <ul class="list-unstyled">
+                <li class="mx-auto py-2"><a href="../public/index.php?p=manageUser&amp;action=validate" class="d-block bg-secondary py-2 text-white">valider un utilisateur</a></li>
+                <li class="mx-auto py-2"><a href="../public/index.php?p=managePost&amp;action=addPost" class="d-block bg-secondary py-2 text-white">ajouter un article</a></li>
+                <li class="mx-auto py-2"><a href="../public/index.php?p=managePost&amp;action=ManagerPosts" class="d-block bg-secondary py-2 text-white">modifier un article</a></li>
+                <li class="mx-auto py-2"><a href="../public/index.php?p=managePost&amp;action=deletePost" class="d-block bg-secondary py-2 text-white">suprimer un article</a></li>
+                <li class="mx-auto py-2"><a href="../public/index.php?p=logout" class="d-block bg-secondary py-2 text-white">déconnecter</a></li>
+                
+            </ul>
+            
+        </div>
+        
+        
+    </div>
+    {% endblock %}
+    {% block footer %}
+    {% include "footer.php" %}
+    {% endblock %}
