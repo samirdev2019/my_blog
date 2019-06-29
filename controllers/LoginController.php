@@ -16,9 +16,7 @@ class LoginController{
             
             $verify['validated'] = false;
             $verify['info']= false;
-            
             return $verify;
-
         }else{
 
            return $this->authenticationService->checkConnection($this->datas['email'],$this->datas['password']);
