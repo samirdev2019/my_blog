@@ -1,11 +1,15 @@
 <?php
-class AuthenticationService {
-
+class AuthenticationService
+{
     public $userManager;
-    public function __construct(){
+
+    public function __construct()
+    {
         $this->userManager = new UserManager();
     }
-    public function checkConnection(string $email, string $password){
+
+    public function checkConnection(string $email, string $password)
+    {
         $user=$this->userManager->getUser($email);
         if($user && password_verify($password,$user->password)){
             if($user->validated === null){
@@ -30,12 +34,12 @@ class AuthenticationService {
         }
         return $verify;
     }
-    public function iSConnected(){
-        
-        
+    public function iSConnected()
+    {
         if($_SESSION['user_id']??0 != 0){
             return true;
 
         }
         return false;
     }
+}
