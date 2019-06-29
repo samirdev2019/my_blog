@@ -47,15 +47,22 @@ class PostControler{
     /**
      * deletePost
      *
-     * @param  mixed $post
+     * @param  int $idpost
      *
      * @return void
      */
-    public function deletePost($idPost){
+    public function deletePost(int $idPost):void{
         
         $this->postManager->deletePost($idPost);
     }
-    public function checkInformationPost(array $infoPost){
+    /**
+     * checkInformationPost for check the infos come from the user
+     *
+     * @param  array $infoPost
+     *
+     * @return bool
+     */
+    public function checkInformationPost(array $infoPost):bool{
         
         if(empty($infoPost['title']) || empty($infoPost['chapo'])|| empty($infoPost['author']) || empty($infoPost['title']) || empty($infoPost['content']) ){
             return false;
@@ -64,13 +71,27 @@ class PostControler{
         }
 
     }
+    /**
+     * getTwig
+     *
+     * @return object $twig Twig_Environment
+     */
     private function getTwig(){
-        //session_start();
         $loader = new Twig_Loader_Filesystem(['../views','../views/backend','../controllers']); 
         return $twig = new Twig_Environment($loader, ['cache' => false]);
        
     }
-    public function managePost($action,$messageSuccess){
+    /**
+     * managePost function allows to manage the articles according 
+     * to the action wanted by the user, by sending him messages according
+     *  to the case
+     *
+     * @param  string $action the action wanted by the user
+     * @param  mixed $messageSuccess 
+     *
+     * @return void
+     */
+    public function managePost(string $action,string $messageSuccess):void{
         $twig=$this->getTwig();
         
         if(!empty($_POST) && $this->checkInformationPost($_POST)){
@@ -94,7 +115,15 @@ class PostControler{
        
 
     }
-    public function actionToDo($action,$id=null){
+    /**
+     * actionToDo
+     *
+     * @param string  $action action wanted by the user
+     * @param  int $id post id
+     *
+     * @return void
+     */
+    public function actionToDo(string $action,$id=null):void{
         
         switch($action){
             case 'addPost':
@@ -107,7 +136,6 @@ class PostControler{
             $twig=$this->getTwig();
             $post=$this->deletePost($id);
             $posts=$this->getListPosts();
-            // var_dump($post);die('post controleur');
             echo $twig->render('ManagerPosts'.'.twig',[
                 'title' => 'account',
                 'message'=>"l'article a été bien suprimé" ,
@@ -131,7 +159,6 @@ class PostControler{
             case 'posteToUpdate':
             $twig=$this->getTwig();
             $post=$this->getPost($id);
-            // var_dump($post);die('post controleur');
             echo $twig->render($action.'.twig',[
                 'title' => 'account',
                 'message'=>'vous etes entrain de modifier cet article',
@@ -149,13 +176,4 @@ class PostControler{
 
         }
     }
-}//'class/'.$class_name.'.php';
-// if($action==='addPost'){
-            
-//     $this->managePost($action,'votre article a été bien enregisté');
-// }elseif($action==='updatePost'){
-
-//     $this->managePost($action,'votre article a été bien enregisté');
-// }elseif({
-//     $this->managePost($action,'votre article a été bien suprimé');
-// }
+}
