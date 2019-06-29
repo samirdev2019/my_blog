@@ -23,7 +23,7 @@ class UserManager extends Database{
     }   
 
     public function addUser(string $username,string $password, string $email):void{
-        $user=$this->pdo->prepare('INSERT INTO users (username,password,email) VALUES(:username,:password,:email)');
+        $user=$this->pdo->prepare('INSERT INTO users (username,password,email,date_registration) VALUES(:username,:password,:email,now())');
          $user->execute([
             ':username'=>$username,
             ':password' => $password,
@@ -39,10 +39,16 @@ class UserManager extends Database{
         return $user=$req->fetch(PDO::FETCH_OBJ);
     }
     public function getUsersNotYetValidated(){
-        $req=$this->pdo->query('SELECT * FROM users WHERE validated is null');
+        $req=$this->pdo->query('SELECT user_id,username,email,date_format(date_registration,\' %d\%m\%Y %Hh%imin%ss\') as registred FROM users WHERE validated is null');
         $req->execute();
          return $users=$req->fetchAll(PDO::FETCH_OBJ);
         
         
+    }
+
+    public function ValidateUser(int $id_user):bool
+    {
+        $req=$this->pdo->prepare('UPDATE users SET validated=1 WHERE user_id=?');
+        return $req->execute([$id_user]);
     }
 }

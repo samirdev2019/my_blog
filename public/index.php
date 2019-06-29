@@ -148,17 +148,28 @@ switch($page){
         }
         break;
     case 'manageUser':
-        $users = new ValidateUsers();
-       $usersNotValidate= $users->getUsersToValidate();
-        
-        echo $twig->render('usersToValidate.twig',[
-            'title' => 'utilsateurs inscrit',
-            'users' => $users,
-            'session'=>$_SESSION,
-            'message'=>'après la validation d\'un utilisateur inscrit, il devient administrateur',
-            'tyep'=>'info'
-        ]);
+        $connect = new AuthenticationService();
+        if($connect->isConnected()){
+            $usersNotValidate = new ValidateUsersController();
+            if(isset($_GET['id'])){
+                $usersNotValidate->validateUser($_GET['id']);
+                $message = "l'utilisateur a bien été validé";
+            }else{
+                $message = "après la validation d\'un utilisateur inscrit, il devient administrateur";
+            }
+            $users=$usersNotValidate->getUsersToValidate();
+            echo $twig->render('usersToValidate.twig',[
+                'title' => 'utilsateurs inscrit',
+                'users' => $users,
+                'session'=>$_SESSION,
+                'message'=>$message,
+                'type'=>'info'
+            ]);
+        }else{
+            echo $twig->render('home.twig',['title' => 'accueille']);
+        }
     break;
+    
     case 'contact' :
             unset($faildes);
             $mail= new ControllerContact($_POST);
