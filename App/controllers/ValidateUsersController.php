@@ -1,4 +1,7 @@
 <?php
+namespace controllers;
+
+use models\UserManager as UserManager;
 class ValidateUsersController
 {
     private $userManager;

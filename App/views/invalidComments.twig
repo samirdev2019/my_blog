@@ -1,0 +1,33 @@
+{% extends "accountTemplate.twig" %}
+
+    {% block content %}
+    {% if message %}
+    <p class="alert alert-{{ type }}">{{ message }}</p>
+    {% endif %}
+    <table class="table table-striped table-responsive-md">
+        <thead>
+            <tr>
+                <th scope="col">N° </th>
+                <th scope="col">commenté par</th>
+                <th scope="col">Date</th>
+                <th scope="col">contenu</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for comment in comments %}
+            <tr>
+                <th scope="row">{{ comment.comment_id }}</th>
+                <td>{{ comment.user_id }}</td>
+                <td>{{ comment.commented }}</td>
+                <td>{{ comment.content}}</td>
+                <td><a class="btn btn-success btn-sm" href="index.php?p=commentsToValidate&amp;id_comment={{comment.comment_id }}&amp;post_id={{comment.post_id}}">valider</a></td>
+            </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    {% endblock %}
+    {% block footer %}
+    {{ parent() }}
+    {% endblock %}
+        
+   

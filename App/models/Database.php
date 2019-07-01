@@ -1,4 +1,6 @@
 <?php
+namespace models;
+
 /**
  * this class alow a conection to database and do sommes requests
  */
@@ -31,8 +33,8 @@ class Database{
      */
     protected function getPDO(){
         if($this->pdo === null){
-            $pdo = new PDO('mysql:host=localhost;dbname=myblog','root','');
-            $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+            $pdo = new \PDO('mysql:host=localhost;dbname=myblog','root','');
+            $pdo->setAttribute(\PDO::ATTR_ERRMODE,\PDO::ERRMODE_EXCEPTION);
             $this->pdo = $pdo; 
         }
         return $this->pdo;
@@ -48,7 +50,7 @@ class Database{
     public function query($statement){
         
         $req=$this->getPDO()->query($statement);
-        $data = $req->fetchAll(PDO::FETCH_OBJ);
+        $data = $req->fetchAll(\PDO::FETCH_OBJ);
         return $data;
         
         

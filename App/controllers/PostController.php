@@ -1,6 +1,10 @@
 <?php
-require '../model/PostManager.php';
-class PostControler{
+namespace controllers;
+
+use models\PostManager as PostManager;
+use models\CommentManager as CommentManager;
+//require '../model/PostManager.php';
+class PostController{
     private $postManager;
     public function __construct(){
         $this->postManager = new PostManager('myblog');
@@ -69,7 +73,6 @@ class PostControler{
         }else{
            return true;
         }
-
     }
     /**
      * getTwig
@@ -77,8 +80,8 @@ class PostControler{
      * @return object $twig Twig_Environment
      */
     private function getTwig(){
-        $loader = new Twig_Loader_Filesystem(['../views','../views/backend','../controllers']); 
-        return $twig = new Twig_Environment($loader, ['cache' => false]);
+        $loader = new \Twig_Loader_Filesystem(['../App/views','../App/views/backend','../App/controllers']); 
+        return $twig = new \Twig_Environment($loader, ['cache' => false]);
        
     }
     /**
@@ -112,8 +115,6 @@ class PostControler{
                 
             ]);
         }
-       
-
     }
     /**
      * actionToDo
@@ -127,51 +128,51 @@ class PostControler{
         
         switch($action){
             case 'addPost':
-            $this->managePost($action,'votre article a été bien enregisté');
+                $this->managePost($action,'votre article a été bien enregisté');
             break;
             case 'updatePost':
-            $this->managePost($action,'votre article a été bien modifié');
+                $this->managePost($action,'votre article a été bien modifié');
             break;
             case 'deletePost':
-            $twig=$this->getTwig();
-            $post=$this->deletePost($id);
-            $posts=$this->getListPosts();
-            echo $twig->render('ManagerPosts'.'.twig',[
+                $comments = new CommentManager();
+                $twig=$this->getTwig();
+                $post=$this->deletePost($id);
+                $comments->deleteComments($id);
+                $posts=$this->getListPosts();
+                echo $twig->render('ManagerPosts'.'.twig',[
                 'title' => 'account',
                 'message'=>"l'article a été bien suprimé" ,
                 'type'=> 'success',
                 'session'=> $_SESSION,
                 'posts'=>$posts
-                
-            ]);
+                ]);
 
             break;
             case 'ManagerPosts':
-            $twig=$this->getTwig();
-            $posts=$this->getListPosts();
-            echo $twig->render($action.'.twig',[
+                $twig=$this->getTwig();
+                $posts=$this->getListPosts();
+                echo $twig->render($action.'.twig',[
                 'title' => 'account',
                 'session'=> $_SESSION,
                 'posts'=>$posts
                 
-            ]);
+                ]);
             break;
             case 'posteToUpdate':
-            $twig=$this->getTwig();
-            $post=$this->getPost($id);
-            echo $twig->render($action.'.twig',[
+                $twig=$this->getTwig();
+                $post=$this->getPost($id);
+                echo $twig->render($action.'.twig',[
                 'title' => 'account',
                 'message'=>'vous etes entrain de modifier cet article',
                 'type'=> 'info',
                 'session'=> $_SESSION,
                 'post'=>$post
-                
-            ]);
-
+                ]);
             break;
             default :
-            header('HTTP/1.0 404 Not Found');
-            echo $twig->render('404.twig');
+                $twig=$this->getTwig();
+                header('HTTP/1.0 404 Not Found');
+                echo $twig->render('404.twig');
             break;
 
         }

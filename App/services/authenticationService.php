@@ -1,4 +1,7 @@
 <?php
+namespace services;
+
+use models\UserManager as UserManager;
 class AuthenticationService
 {
     public $userManager;

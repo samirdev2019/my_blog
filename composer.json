@@ -7,6 +7,14 @@
             "email": "allabsamir777@gmail.com"
         }
     ],
+    "autoload":{
+        "psr-4": {
+            "controllers\\":"App/controllers",
+            "models\\":"App/models",
+            "services\\":"App/services"
+        }
+       
+    },
     "require": {
         "twig/twig": "2.0"
     }

@@ -1,5 +1,8 @@
 <?php
-require '../model/CommentManager.php';
+namespace controllers;
+
+use models\CommentManager as CommentManager;
+//require '../model/CommentManager.php';
 class CommentController{
     private $db;
 
@@ -38,5 +41,13 @@ class CommentController{
      */
     public function addComment(int $postId,int $userId,string $content): void{
         $this->db->addComment($postId,$userId,$content);
+    }
+    public function getInvalidComments($id_post)
+    {
+        return $this->db->invalidComments($id_post);
+    }
+    public function validateComment($id_comment)
+    {
+        return $this->db->validateComment($id_comment);
     }
 }

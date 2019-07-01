@@ -1,5 +1,7 @@
 <?php
-class ControllerContact{
+namespace controllers;
+
+class ContactController {
     private $datas ;
     private $errors = [];
 
@@ -10,26 +12,26 @@ class ControllerContact{
         if(!array_key_exists('username',$this->datas) || $name === ''){
             $this->errors[] = 'vous devez renseigner un nom !';
         }
-        
-
     }
+    
     public function chekEmail($mail){
         if(!array_key_exists('email',$this->datas) || $mail === ''){
             $this->errors[] = 'vous devez renseigner un email !';
         }elseif(!filter_var($mail,FILTER_VALIDATE_EMAIL)){
             $this->errors[] = 'vous devez entrer une adresse mail valide';
         }
-        
-
     }
+
     public function chekMessage($message){
         if(!isset($message) || $message === ''){
             $this->errors[] = "vous devez remplire le champ message";
         }
     }
+
     public function getFaildes(){
         return $this->errors;
     }
+
     public function sendMail(){
         $to ='allabsamir777@gmail.com';
         $subject = 'contact de mon blog';
@@ -49,5 +51,3 @@ class ControllerContact{
         return $success;
     }
 }
-
-

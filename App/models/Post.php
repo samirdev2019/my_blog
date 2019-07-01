@@ -1,4 +1,6 @@
 <?php
+namespace models;
+
 class Post{
 
     public function getURL(){

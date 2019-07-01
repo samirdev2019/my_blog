@@ -22,21 +22,26 @@
                 <img class="im-fluid"src="../public/img/portfolio/fullsize/{{ post.post_id }}.jpg"  alt="...">
             </div>
             <div class="row">
-                <h1 class="col-xs-10 col-md-12 mb-3 ml-3">{{ post.title }}</h1><br />
-                <h5 class="col-xs-10 col-md-12 mb-3 ml-3"><em>mis à jour le :</em> {{post.update_date}}<em> Auteur:</em> {{post.author}}</h5></p>
+                <h1 class="col-xs-10 col-md-12 mb-3 ml-3 d-block">{{ post.title }}</h1>
+                <h5 class="col-xs-10 col-md-12 mb-3 ml-3 d-block">
+                    <em>mis à jour le :</em>
+                     {{post.update_date}}
+                     <em> Auteur:</em> 
+                     {{post.author}}
+                </h5>
             </div>
             
         </header>
         <div class="row p-3">
             <h4>{{ post.chapo | capitalize }}</h4>    
         </div>
-        <div class="row mt-5  mb-5 bg-light">
+        <div class="row mt-5  mb-5 bg-light col-xs-10 col-md-12 mb-3 mx-3 d-block">
             {{post.content | nl2br }}
         </div>
 
-        <footer>
-            <h3>Laissez-nous un commentaire</h3>
-            <form action="../public/index.php?" method="post">
+        <footer class="row my-4">
+            <h3 class="col-xs-10 col-md-12 mb-3 ml-3 d-block">Laissez-nous un commentaire</h3>
+            <form class="col-xs-10 col-md-12 mb-3 ml-3 d-block" action="../public/index.php?" method="post">
                 <p><textarea name="comment" rows="8" cols="45"></textarea></p>
                 <p><input type="hidden" name="userId" value="{{ post.user_id}}"></p>
                 <p><input type="hidden" name="id" value="{{ post.post_id }}"></p>
@@ -49,7 +54,9 @@
         </footer>
     </article>
     <div class="row mx-5">
+        {% if comments %}
         <h3>Liste de commentaires concernant l'article : </h3>
+        {% endif %}
         <ul class="list-unstyled">
             {% for comment in comments %}
             

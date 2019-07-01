@@ -1,5 +1,7 @@
 <?php
-require '../model/UserManager.php';
+namespace controllers;
+
+use models\UserManager as UserManager;
 class RegisterController{
     
     private $datas = [];

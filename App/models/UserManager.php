@@ -1,4 +1,6 @@
 <?php
+namespace models;
+require 'Database.php';
 class UserManager extends Database{
 
     private $pdo;
@@ -36,12 +38,12 @@ class UserManager extends Database{
     public function getUser(string $email):object{
         $req=$this->pdo->prepare('SELECT * FROM users WHERE email=?');
         $req->execute([$email]);
-        return $user=$req->fetch(PDO::FETCH_OBJ);
+        return $user=$req->fetch(\PDO::FETCH_OBJ);
     }
     public function getUsersNotYetValidated(){
         $req=$this->pdo->query('SELECT user_id,username,email,date_format(date_registration,\' %d\%m\%Y %Hh%imin%ss\') as registred FROM users WHERE validated is null');
         $req->execute();
-         return $users=$req->fetchAll(PDO::FETCH_OBJ);
+         return $users=$req->fetchAll(\PDO::FETCH_OBJ);
         
         
     }

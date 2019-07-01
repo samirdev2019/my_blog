@@ -1,6 +1,7 @@
 <?php
-require '../services/authenticationService.php';
+namespace controllers;
 
+use services\AuthenticationService as AuthenticationService;
 class LoginController
 {
     private $datas = [];

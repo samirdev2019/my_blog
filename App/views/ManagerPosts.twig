@@ -22,8 +22,9 @@
                 <td>{{ post.chapo }}</td>
                 <td>{{ post.author }}</td>
                 <td>{{ post.update_date }}</td>
-                <td><a href="../public/index.php?p=managePost&amp;action=posteToUpdate&amp;id={{ post.post_id }}">modifier</a></td>
-                <td><a href="../public/index.php?p=managePost&amp;action=deletePost&amp;id={{ post.post_id }}">suprimer</a></td>
+                <td><a class="btn btn-info btn-sm" href="../public/index.php?p=managePost&amp;action=posteToUpdate&amp;id={{ post.post_id }}">modifier</a></td>
+                <td><a class="btn btn-success btn-sm data-toggle="tooltip" data-placement="top" title="validation de commentaires"" href="../public/index.php?p=commentsToValidate&amp;id={{ post.post_id }}">commentaires</a></td>
+                <td><a class="btn btn-primary btn-sm" href="../public/index.php?p=managePost&amp;action=deletePost&amp;id={{ post.post_id }}">suprimer</a></td>
             </tr>
     {% endfor %}
     </tbody>
