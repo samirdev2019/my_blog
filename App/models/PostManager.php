@@ -1,7 +1,6 @@
 <?php
 namespace models;
 
-//require 'Database.php';
 class PostManager extends Database{
     private $db;
     public function __construct(){
