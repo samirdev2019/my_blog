@@ -3,10 +3,12 @@ namespace controllers;
 
 use models\PostManager as PostManager;
 use models\CommentManager as CommentManager;
-//require '../model/PostManager.php';
-class PostController{
+
+class PostController
+{
     private $postManager;
-    public function __construct(){
+    public function __construct()
+    {
         $this->postManager = new PostManager('myblog');
     }
     /**
@@ -14,38 +16,41 @@ class PostController{
      *
      * @return array posts object list
      */
-    public function getListPosts() {         
+    public function getListPosts():array
+    {         
         return $this->postManager->getPosts();
     }
     /**
      * getPost
      *
-     * @param  mixed $id index of post
+     * @param  int $id index of post
      *
      * @return object this function return the object that we request using his id
      */
-    public function getPost($id){
+    public function getPost(int $id):object
+    {
         return $this->postManager->getPost($id);
     }
     /**
      * addPost
      *
-     * @param  mixed $post
+     * @param  array $post
      *
      * @return void
      */
-    public function addPost(array $post=[]){
-        
+    public function addPost(array $post=[]):void
+    {
         $this->postManager->addPost($post);
     }
     /**
      * updatePost
      *
-     * @param  mixed $post
+     * @param  array $post
      *
      * @return void
      */
-    public function updatePost($post){
+    public function updatePost(array $post):void
+    {
         $this->postManager->updatePost($post);
     }
     /**
@@ -55,8 +60,8 @@ class PostController{
      *
      * @return void
      */
-    public function deletePost(int $idPost):void{
-        
+    public function deletePost(int $idPost):void
+    {
         $this->postManager->deletePost($idPost);
     }
     /**
@@ -66,8 +71,8 @@ class PostController{
      *
      * @return bool
      */
-    public function checkInformationPost(array $infoPost):bool{
-        
+    public function checkInformationPost(array $infoPost):bool
+    {
         if(empty($infoPost['title']) || empty($infoPost['chapo'])|| empty($infoPost['author']) || empty($infoPost['title']) || empty($infoPost['content']) ){
             return false;
         }else{
@@ -79,10 +84,10 @@ class PostController{
      *
      * @return object $twig Twig_Environment
      */
-    private function getTwig(){
+    private function getTwig()
+    {
         $loader = new \Twig_Loader_Filesystem(['../App/views','../App/views/backend','../App/controllers']); 
         return $twig = new \Twig_Environment($loader, ['cache' => false]);
-       
     }
     /**
      * managePost function allows to manage the articles according 
@@ -94,9 +99,9 @@ class PostController{
      *
      * @return void
      */
-    public function managePost(string $action,string $messageSuccess):void{
+    public function managePost(string $action,string $messageSuccess):void
+    {
         $twig=$this->getTwig();
-        
         if(!empty($_POST) && $this->checkInformationPost($_POST)){
             $this->$action($_POST);
             echo $twig->render($action.'.twig',[
@@ -106,13 +111,11 @@ class PostController{
             'type' => 'success'
             ]);
         }else{ 
-            
             echo $twig->render($action.'.twig',[
                 'title' => 'account',
                 'session'=> $_SESSION,
                 'message' => 'veuillez remplire tous les champs si-desous',
                 'type' => 'danger'
-                
             ]);
         }
     }
@@ -124,8 +127,8 @@ class PostController{
      *
      * @return void
      */
-    public function actionToDo(string $action,$id=null):void{
-        
+    public function actionToDo(string $action,$id=null):void
+    {
         switch($action){
             case 'addPost':
                 $this->managePost($action,'votre article a été bien enregisté');

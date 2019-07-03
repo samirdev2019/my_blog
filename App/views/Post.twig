@@ -1,7 +1,11 @@
-
-
-
 {% extends 'layout.twig' %}
+{% block navbar %}
+{% if session.user_id is empty %}
+{{ parent() }}
+{% elseif session %}
+{% include "navAcount.php" %}
+{% endif %}
+{% endblock %}
 {% block Breadcrumb %}<nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="../public/index.php?p=home">Accueil</a></li>
@@ -9,10 +13,6 @@
       <li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
     </ol>
   </nav>{% endblock %}
-
-
-
-
 {% block content %}
 
 <div class="container text-justify">
@@ -42,8 +42,14 @@
         <footer class="row my-4">
             <h3 class="col-xs-10 col-md-12 mb-3 ml-3 d-block">Laissez-nous un commentaire</h3>
             <form class="col-xs-10 col-md-12 mb-3 ml-3 d-block" action="../public/index.php?" method="post">
-                <p><textarea name="comment" rows="8" cols="45"></textarea></p>
-                <p><input type="hidden" name="userId" value="{{ post.user_id}}"></p>
+                <p>
+                    <label class="d-block mb-0" for="username">Votre nom</label>
+                    <input  type="text" name="username" id="username">
+                </p>  
+                <p>
+                    <label class="d-block mb-0" for="comment">Votre commentaire</label>
+                    <textarea name="comment" rows="8" cols="45"></textarea>
+                </p>
                 <p><input type="hidden" name="id" value="{{ post.post_id }}"></p>
                 <p><input type="hidden" name="p" value="post"></p>
                 <p>
@@ -63,10 +69,15 @@
                 <li class="media my-4 bg-light w-80 l-5 border">
                     <img src="../public/img/mypic.png" class="mr-3 rounded-circle img-thumbnail imgtosmall" alt="...">
                     <div class="media-body">
-                    <p><em>envoyé le :</em> {{comment.coment_date}} <em>par :</em> :{{ comment.username }}</p>
-                    <hr>
-                    <h5 class="mt-0 mb-1">{{ comment.author }}</h5>
-                   <p class="font"> {{ comment.content }} </p>
+                        <p>
+                            <span class="font-weight-bold">envoyé le :</span>
+                            {{comment.coment_date}} 
+                            <span class="font-weight-bold">par :</span>
+                            {{ comment.commented_by }}
+                        </p>
+                        <hr>
+                        <h5 class="mt-0 mb-1">{{ comment.author }}</h5>
+                        <p class="font"> {{ comment.content }} </p>
                     
                     </div>
                 </li>

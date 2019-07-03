@@ -1,4 +1,11 @@
 {% extends 'home.twig' %}
+{% block navbar %}
+{% if session %}
+{% include "navAcount.php" %}
+{% else %}
+{{ parent() }}
+{% endif %}
+{% endblock %}
 {% block Breadcrumb %} {% endblock %}
 {% block content %}
 {% block presentation %} {% endblock %}

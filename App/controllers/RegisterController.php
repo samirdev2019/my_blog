@@ -2,12 +2,14 @@
 namespace controllers;
 
 use models\UserManager as UserManager;
-class RegisterController{
+class RegisterController
+{
     
     private $datas = [];
     private $userManager;
     
-    public function __construct(array $datas=[]){
+    public function __construct(array $datas=[])
+    {
         $this->datas = $datas;
         $this->userManager = new UserManager();
     }
@@ -20,11 +22,10 @@ class RegisterController{
      * 3: Are the two passwords entered the same?     
      * @return array $errors: faildes that can be comitted by the user 
      */
-    public function chekInformationPresence(){
+    public function chekInformationPresence():array
+    {
         $errors=[];
-        
         foreach($this->datas as $key => $value){
-            
             if($key === 'username'){
                 if(empty($value) || !preg_match("#^[a-zA-z0-9]{6,}$#",$this->datas['username'])){
                     $errors[] = "vous devez vérifier votre nom d'utilisateur";
@@ -41,7 +42,6 @@ class RegisterController{
                 if(empty($value) || $this->datas['password'] != $this->datas['pasword_confirmation']){
                     $errors[] = "confirmation de mot de passe incorecte";
                 }
-
             }
             if($key === 'email'){
                 if(empty($value) || !filter_var($this->datas['email'],FILTER_VALIDATE_EMAIL)){
@@ -51,7 +51,6 @@ class RegisterController{
                         $errors[] = "cette adresse mail est déja utilisée";
                     }
                 }
-
             } 
         }
         return $errors;
@@ -63,11 +62,11 @@ class RegisterController{
      *
      * @return string $paswordhashed : the password hashed (choped)
      */
-    public function getHashPassword(string $password){
+    public function getHashPassword(string $password)
+    {
         $paswordhashed = password_hash($this->datas['password'],PASSWORD_BCRYPT); 
         return $paswordhashed;
     }
-    
     /**
      * addUser : allow us to add a new user calling the function addUser of UserManager class
      *
@@ -77,16 +76,8 @@ class RegisterController{
      *
      * @return void
      */
-    public function addUser(string $username,string $password,string $email):void{
+    public function addUser(string $username,string $password,string $email):void
+    {
         $this->userManager->addUser($username,$password,$email);
-
     }
-
-    // public function getUser($username){
-    //    $this->userManager->getUser($username);
-    // }
-    
-   
 }
-
-

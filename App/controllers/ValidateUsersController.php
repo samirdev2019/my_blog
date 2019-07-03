@@ -9,11 +9,11 @@ class ValidateUsersController
     {
         $this->userManager = new UserManager();
     }
-    function getUsersToValidate():array{
+    function getUsersToValidate():array
+    {
        return $users= $this->userManager->getUsersNotYetValidated();
        
     }
-
     public function validateUser(int $id_user):bool
     {
        return $this->userManager->ValidateUser($id_user);

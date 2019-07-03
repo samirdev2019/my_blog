@@ -11,7 +11,7 @@ use services\AuthenticationService as AuthenticationService;
 $loader = new Twig_Loader_Filesystem(['../App/views','../App/views/backend','../App/controllers']); 
 $twig = new Twig_Environment($loader, [
     'cache' => false,//__DIR__ . '/tmp',
-    ]);
+]);
 $page = 'home';
 if(isset($_GET['p'])){
     $page = $_GET['p'];
@@ -20,31 +20,62 @@ if(isset($_GET['p'])){
 }
 switch($page){
     case 'home' :
+    $connect = new AuthenticationService();
+    if(!$connect->isConnected()){
         echo $twig->render('home.twig',['title' => 'Page d\'acueil']);
+    }else{
+            echo $twig->render('home.twig',[
+            'title' => 'Page d\'acueil',
+            'session'=>$_SESSION
+        ]);
+    }
     break;
     case 'posts' :
-        $getPosts = new PostController();
-        echo $twig->render('posts.twig',[
+        $connect = new AuthenticationService();
+        if(!$connect->isConnected()){
+            $getPosts = new PostController();
+            echo $twig->render('posts.twig',[
+                'title' => 'Articles',
+                'posts' => $getPosts->getListPosts()     
+            ]);
+        }else{
+            $getPosts = new PostController();
+            echo $twig->render('posts.twig',[
             'title' => 'Articles',
-            'posts' => $getPosts->getListPosts()     
-        ]);
+            'posts' => $getPosts->getListPosts(),
+            'session' => $_SESSION    
+            ]);
+        }
     break; 
     case 'post':
-        if(isset($_GET['id'])){
+        if(isset($_GET['id']) || isset($_POST['id'])){
             if(isset($_GET['id'])){
                 $id = (int) $_GET['id'];
+            }else{
+                $id = (int) $_POST['id'];
             }
             if($id>0){
                 $getPosts = new PostController();
                 $comments = new CommentController();
-                if(!empty($_POST['comment'])){
-                    $comments->addComment($_POST['id'],$_POST['userId'],$_POST['comment']);  
+                if(!empty($_POST['comment']) && !empty($_POST['username'])){
+                    $comments->addComment($_POST['id'],$_POST['username'],$_POST['comment']);  
                 }
-                echo $twig->render('Post.twig',[
-                'title' => 'détail d\'article',
-                'post' => $getPosts->getPost($id),
-                'comments' => $comments->getComments($id)
-                ]);
+                $connect = new AuthenticationService();
+                if(!$connect->isConnected()){
+                    echo $twig->render('Post.twig',[
+                    'title' => 'détail d\'article',
+                    'post' => $getPosts->getPost($id),
+                    'comments' => $comments->getComments($id)
+                    ]);
+                }else{ //j'ai ajouter ça
+                    echo $twig->render('Post.twig',[
+                        'title' => 'détail d\'article',
+                        'post' => $getPosts->getPost($id),
+                        'comments' => $comments->getComments($id),
+                        'session' => $_SESSION
+                    ]);
+
+                }
             }else{
                 require 'index.php?p=posts';
             }
@@ -90,27 +121,30 @@ switch($page){
                 }else{
                     header('HTTP/1.0 404 Not Found');
                     echo $twig->render('404.twig');
-                    //break;
                 }
             }elseif(isset($_GET['id_comment'])&& isset($_GET['post_id'])){
                 $id_comment= (int) $_GET['id_comment'];
                 $post_id= (int) $_GET['post_id'];
+                $userId = $_SESSION['user_id'];
+                
                 if($id_comment>0 && $post_id>0 ){
-                    $commentToValidat->validateComment($id_comment);
+                    
+                    $commentToValidat->validateComment($id_comment,$userId);
                     echo $twig->render('invalidComments.twig',[
                     'comments' => $commentToValidat->getInvalidComments($post_id),
-                    'message' =>'liste de commentaires pas encore validés'
+                    'message' =>'liste de commentaires pas encore validés',
+                    'session' => $_SESSION
                     ]); 
                 }else{
                     header('HTTP/1.0 404 Not Found');
                     echo $twig->render('404.twig');
-                    //break;
+                    
                 } 
             }
         }else{
             header('HTTP/1.0 404 Not Found');
             echo $twig->render('404.twig');
-            //break;
+            
         }
     break; 
     case 'connexion' :
@@ -120,7 +154,7 @@ switch($page){
             'message' => "identifiez-vous s'il vous plaît !",
             'type' => 'info'
             ]);
-            //break;
+            
         }
         $verifyUser = new LoginController($_POST);
         $login = $verifyUser->checkFormLoginInformation();
@@ -130,22 +164,34 @@ switch($page){
             'session'=> $_SESSION,
             'message' => 'bienvenue dans votre compte'
             ]);
-            //break;
+            
         }elseif($login['info'] && !$login['validated']){
             echo $twig->render('login.twig',[
             'title' => 'Connexion',
             'message' => "votre compte n'est pas encore validée par un administrateur",
             'type' => 'info'
             ]);
-            //break;
+            
         }else{
             echo $twig->render('login.twig',[
             'title' => 'Connexion',
             'message' => "mauvais email ou mot de passe",
             'type' => 'danger'
             ]);
-            //break;
+            
         }
+    break;
+    case 'backToAcount' :
+    $connect = new AuthenticationService();
+    if($connect->isConnected()){
+        echo $twig->render('account.twig',[
+            'title' => 'account',
+            'session'=> $_SESSION,
+            'message' => 'Bienvenue dans votre compte'
+            ]);
+        }else{
+        echo $twig->render('home.twig',['title'=>'Accueille']);
+    }
     break;
     case 'logout':
         $verifyUser = new LoginController($_POST);
@@ -203,20 +249,30 @@ switch($page){
         $mail->chekMessage($_POST['message']);
         unset($faildes);
         $faildes = $mail->getFaildes();
-        if(isset($faildes) && !empty($faildes)){
-            echo $twig->render('ContactForm.twig',[
-            'errors' => $mail->getFaildes(),
-            'username'=> $_POST['username'],
-            'email' => $_POST['email'],
-            'message' => $_POST['message']
-            ]);
-            //break;  
+        $connect = new AuthenticationService();
+        if(!$connect->isConnected()){
+            $session = false;
         }else{
-            if($mail->sendMail()){
-                echo $twig->render('ContactForm.twig',['succes' => 'votre mail a été bien envoyé!']);
-                // break; 
-            }     
-        }             
+            $session = true;
+        }
+            if(isset($faildes) && !empty($faildes)){
+                echo $twig->render('ContactForm.twig',[
+                'errors' => $mail->getFaildes(),
+                'username'=> $_POST['username'],
+                'email' => $_POST['email'],
+                'message' => $_POST['message'],
+                'session' => $session
+                ]);
+                
+            }else{
+                if($mail->sendMail()){
+                    echo $twig->render('ContactForm.twig',[
+                        'succes' => 'votre mail a été bien envoyé!',
+                        'session' => $session
+                    ]);  
+                }     
+            }
+        
     break;  
     default :
         header('HTTP/1.0 404 Not Found');

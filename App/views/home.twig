@@ -1,6 +1,10 @@
 {% extends 'layout.twig' %}
 {% block navbar %}
+{% if session.user_id is empty %}
 {{ parent() }}
+{% elseif session %}
+{% include "navAcount.php" %}
+{% endif %}
 {% endblock %}
 
 {% block Breadcrumb %}
@@ -67,20 +71,30 @@
 {% endif %}
         
         
-        <div class="row">
-          <form class=" mx-auto  mb-5" action="index.php" method="post">
-            <p><label class="d-block mb-0" for="username">Nom :</label><input  type="text" name="username" value="{{ username }}" id="username"></p>  
-            <p><input type="hidden" name="p" value="contact"></p>
-            <p><label class="d-block mb-0" for="email">Email :</label>  <input  type="email" name="email" value="{{ email }}" id="email" ></p>
-            <p><label class="d-block mb-0" for="message">Message :</label><textarea  name="message" rows="8" cols="45" id="message">{{ message }}</textarea></p>
-            
-            <p><input type="submit" name="btn" value="Envoyer" class="btn btn-primary"></p>
+    <div class="row">
+      <form class=" mx-auto  mb-5" action="index.php" method="post">
+        <p>
+          <label class="d-block mb-0" for="username">Nom :</label>
+          <input  type="text" name="username" value="{{ username }}" id="username">
+        </p>  
+        <p>
+          <input type="hidden" name="p" value="contact">
+        </p>
+        <p>
+          <label class="d-block mb-0" for="email">Email :</label>
+          <input  type="email" name="email" value="{{ email }}" id="email" >
+        </p>
+        <p>
+          <label class="d-block mb-0" for="message">Message :</label>
+          <textarea  name="message" rows="8" cols="45" id="message">{{ message }}</textarea>
+        </p>
+        <p>
+          <input type="submit" name="btn" value="Envoyer" class="btn btn-primary">
+        </p>
 
-          </form>
-        </div>
-          
-        
-      </div>
-    </section>
+      </form>
+    </div>
+  </div>
+</section>
     {% endblock %}
   {% endblock %}

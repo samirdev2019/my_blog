@@ -2,33 +2,31 @@
 namespace controllers;
 
 use services\AuthenticationService as AuthenticationService;
+
 class LoginController
 {
     private $datas = [];
-    private $authenticationService; 
+    private $authenticationService;
     public $verify=[];
 
-    public function __construct(array $datas=[])
+    public function __construct(array $datas = [])
     {
         $this->datas = $datas;
         $this->authenticationService = new AuthenticationService();
     }
-
     public function checkFormLoginInformation():array
     {
-        if(empty($this->datas['email']) || empty($this->datas['password'])){
-            
+        if (empty($this->datas['email']) || empty($this->datas['password'])) {
             $verify['validated'] = false;
             $verify['info']= false;
             return $verify;
-        }else{
+        } else {
             return $this->authenticationService
-            ->checkConnection($this->datas['email'],
-            $this->datas['password']);
+            ->checkConnection($this->datas['email'], $this->datas['password']
+            );
         }
     }
-    
-    public function logOut()
+    public function logOut():void
     {
         $_SESSION = [];
         session_destroy();

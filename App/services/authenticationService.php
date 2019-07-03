@@ -4,14 +4,14 @@ namespace services;
 use models\UserManager as UserManager;
 class AuthenticationService
 {
-    public $userManager;
+    private $userManager;
 
     public function __construct()
     {
         $this->userManager = new UserManager();
     }
 
-    public function checkConnection(string $email, string $password)
+    public function checkConnection(string $email, string $password):array
     {
         $user=$this->userManager->getUser($email);
         if($user && password_verify($password,$user->password)){
@@ -37,7 +37,7 @@ class AuthenticationService
         }
         return $verify;
     }
-    public function iSConnected()
+    public function iSConnected():bool
     {
         if($_SESSION['user_id']??0 != 0){
             return true;
