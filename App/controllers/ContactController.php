@@ -1,5 +1,5 @@
 <?php
-namespace controllers;
+namespace App\controllers;
 
 class ContactController
 {

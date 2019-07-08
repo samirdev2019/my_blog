@@ -9,11 +9,8 @@
     ],
     "autoload":{
         "psr-4": {
-            "controllers\\":"App/controllers",
-            "models\\":"App/models",
-            "services\\":"App/services"
+            "App\\":"App/"
         }
-       
     },
     "require": {
         "twig/twig": "2.0"

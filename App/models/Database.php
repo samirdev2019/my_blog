@@ -1,10 +1,11 @@
 <?php
-namespace models;
+namespace App\models;
 
 /**
  * this class alow a conection to database and do sommes requests
  */
-class Database{
+class Database
+{
     private $db_name;
     private $db_user;
     private $db_pass;
@@ -20,39 +21,43 @@ class Database{
      *
      * @return void
      */
-    public function __construct($db_name,$db_user='root',$db_pass='',$db_host='localhost'){
+    public function __construct(
+        $db_name,
+        $db_user = 'root',
+        $db_pass = '',
+        $db_host = 'localhost'
+    ) {
         $this->db_name = $db_name;
         $this->db_user = $db_user;
         $this->db_pass = $db_pass;
         $this->db_host = $db_host;
     }
     /**
-     * getPDO alow to get the PDO and initialise it only one time
+     * GetPDO alow to get the PDO and initialise it only one time
      *
      * @return objet the connection object of data base
      */
-    protected function getPDO(){
-        if($this->pdo === null){
-            $pdo = new \PDO('mysql:host=localhost;dbname=myblog','root','');
-            $pdo->setAttribute(\PDO::ATTR_ERRMODE,\PDO::ERRMODE_EXCEPTION);
-            $this->pdo = $pdo; 
+    protected function getPDO()
+    {
+        if ($this->pdo === null) {
+            $pdo = new \PDO('mysql:host=localhost;dbname=myblog', 'root', '');
+            $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->pdo = $pdo;
         }
         return $this->pdo;
-        
     }
     /**
-     * query recive a request data 
+     * Query recive a request data
      *
-     * @param  mixed $statement
+     * @param mixed $statement the request wanted by the user
      *
      * @return array obejects requested
      */
-    public function query($statement){
+    public function query($statement)
+    {
         
         $req=$this->getPDO()->query($statement);
         $data = $req->fetchAll(\PDO::FETCH_OBJ);
         return $data;
-        
-        
     }
 }

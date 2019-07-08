@@ -1,7 +1,7 @@
 <?php
-namespace controllers;
+namespace App\controllers;
 
-use services\AuthenticationService as AuthenticationService;
+use App\services\AuthenticationService as AuthenticationService;
 
 class LoginController
 {
@@ -22,8 +22,7 @@ class LoginController
             return $verify;
         } else {
             return $this->authenticationService
-            ->checkConnection($this->datas['email'], $this->datas['password']
-            );
+            ->checkConnection($this->datas['email'], $this->datas['password']);
         }
     }
     public function logOut():void

@@ -1,7 +1,7 @@
 <?php
-namespace controllers;
+namespace App\controllers;
 
-use models\CommentManager as CommentManager;
+use App\models\CommentManager as CommentManager;
 
 class CommentController
 {

@@ -1,7 +1,8 @@
 <?php
-namespace controllers;
+namespace App\controllers;
 
-use models\UserManager as UserManager;
+use App\models\UserManager as UserManager;
+
 class ValidateUsersController
 {
     private $userManager;
@@ -9,13 +10,12 @@ class ValidateUsersController
     {
         $this->userManager = new UserManager();
     }
-    function getUsersToValidate():array
+    public function getUsersToValidate():array
     {
-       return $users= $this->userManager->getUsersNotYetValidated();
-       
+        return $users= $this->userManager->getUsersNotYetValidated();
     }
     public function validateUser(int $id_user):bool
     {
-       return $this->userManager->ValidateUser($id_user);
+        return $this->userManager->ValidateUser($id_user);
     }
 }

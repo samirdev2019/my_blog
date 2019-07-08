@@ -1,7 +1,8 @@
 <?php
-namespace models;
+namespace App\models;
 
-require_once 'Database.php';
+use App\models\Database as Database;
+
 class UserManager extends Database
 {
     private $pdo;
@@ -11,33 +12,38 @@ class UserManager extends Database
         $this->pdo = $this->getPDO();
     }
     // ambiguité pour la type de valeur reteuner par la fonction
-    public function ChekIxistsUserName(string $username)
+    public function chekIxistsUserName(string $username)
     {
-        $req=$this->pdo->prepare('SELECT user_id FROM users WHERE username=?'); 
+        $req=$this->pdo->prepare('SELECT user_id FROM users WHERE username=?');
 
-       $req->execute([$username]); 
-        return $req->fetch();   
-    } 
+        $req->execute([$username]);
+        return $req->fetch();
+    }
     // ambiguité pour la type de valeur reteuner par la fonction
-    public function ChekIxistsEmail(string $email)
+    public function chekIxistsEmail(string $email)
     {
-        $req=$this->pdo->prepare('SELECT user_id FROM users WHERE email=?'); 
+        $req=$this->pdo->prepare('SELECT user_id FROM users WHERE email=?');
 
-       $req->execute([$email]); 
+        $req->execute([$email]);
          $email = $req->fetch();
         return $email;
-    }   
+    }
 
-    public function addUser(string $username,string $password, string $email):void
+    public function addUser(string $username, string $password, string $email):void
     {
-        $user=$this->pdo->prepare('INSERT INTO users (username,password,email,date_registration) VALUES(:username,:password,:email,now())');
-         $user->execute([
+        $user=$this->pdo->prepare(
+            'INSERT INTO users (username,password,email,date_registration)
+            VALUES(:username,:password,:email,now())'
+        );
+        $user->execute(
+            [
             ':username'=>$username,
             ':password' => $password,
             ':email' => $email
-        ]); 
-        //return $this->pdo->lastInsertId (); 
-         
+            ]
+        );
+        
+        //return $this->pdo->lastInsertId ();
     }
 
     public function getUser(string $email)
@@ -49,12 +55,17 @@ class UserManager extends Database
 
     public function getUsersNotYetValidated():array
     {
-        $req=$this->pdo->query('SELECT user_id,username,email,date_format(date_registration,\' %d\%m\%Y %Hh%imin%ss\') as registred FROM users WHERE validated is null');
+        $req=$this->pdo->query(
+            'SELECT user_id,username,email,
+            date_format(date_registration,\' %d\%m\%Y %Hh%imin%ss\')
+            as registred
+            FROM users WHERE validated is null'
+        );
         $req->execute();
-        return $users=$req->fetchAll(\PDO::FETCH_OBJ);  
+        return $users=$req->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function ValidateUser(int $id_user):bool
+    public function validateUser(int $id_user):bool
     {
         $req=$this->pdo->prepare('UPDATE users SET validated=1 WHERE user_id=?');
         return $req->execute([$id_user]);
