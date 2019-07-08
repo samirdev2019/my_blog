@@ -3,10 +3,10 @@
     <div class="row d-flex justify-content-around">
       <div class="col-xs-4">
         <ul class="list-unstyled">
-          <li><a class="nav-link text-info" href="https://openclassrooms.facebook.com/profile.php?id=100030679643516"><i class="fa fa-facebook mr-4" aria-hidden="true"></i>&nbsp;&nbsp;FaceBook</a></li>
-          <li><a class="nav-link text-info" href="#"><i class="fa fa-twitter mr-4" aria-hidden="true"></i>&nbsp;&nbsp;Twiter</a></li>
-          <li><a class="nav-link text-info" href="https://github.com/samirdev2019"><i class="fa fa-github mr-4 " aria-hidden="true"></i>GitHub</a></li>
-          <li><a class="nav-link text-info" href="www.linkedin.com/in/samir-allab74000"><i class="fa fa-linkedin mr-4" aria-hidden="true"></i>linkedin</a></li>
+          <li><a class="nav-link text-info" href="https://openclassrooms.facebook.com/profile.php?id=100030679643516" target="_blank"><i class="fa fa-facebook mr-4" aria-hidden="true"></i>&nbsp;&nbsp;FaceBook</a></li>
+          <li><a class="nav-link text-info" href="#" target="_blank"><i class="fa fa-twitter mr-4" aria-hidden="true"></i>&nbsp;&nbsp;Twiter</a></li>
+          <li><a class="nav-link text-info" href="https://github.com/samirdev2019" target="_blank"><i class="fa fa-github mr-4 " aria-hidden="true"></i>GitHub</a></li>
+          <li><a class="nav-link text-info" href="www.linkedin.com/in/samir-allab74000" target="_blank"><i class="fa fa-linkedin mr-4" aria-hidden="true"></i>linkedin</a></li>
         </ul>
       </div>
       <div class="col-xs-4 small text-center my-auto text-muted">

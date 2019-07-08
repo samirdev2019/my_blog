@@ -5,10 +5,10 @@
             
            
         </a>
-        <a href="https://openclassrooms.facebook.com/profile.php?id=100030679643516"><i class="fa fa-facebook mr-4 " aria-hidden="true"></i></a>
-        <a href="#t"><i class="fa fa-twitter mr-4 " aria-hidden="true"></i></a>
-        <a href="https://github.com/samirdev2019"><i class="fa fa-github mr-4 " aria-hidden="true"></i></a>
-        <a href="www.linkedin.com/in/samir-allab74000"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+        <a href="https://openclassrooms.facebook.com/profile.php?id=100030679643516" target="_blank"><i class="fa fa-facebook mr-4 " aria-hidden="true"></i></a>
+        <a href="#t" target="_blank"><i class="fa fa-twitter mr-4 " aria-hidden="true"></i></a>
+        <a href="https://github.com/samirdev2019" target="_blank"><i class="fa fa-github mr-4 " aria-hidden="true"></i></a>
+        <a href="www.linkedin.com/in/samir-allab74000" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
         <div class="badge badge-primary text-wrap ml-3" style="width: 8rem;">
             Bienvenue&nbsp;{{session.username}}
         </div>
