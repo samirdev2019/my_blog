@@ -7,19 +7,21 @@ class CommentController
 {
     private $commentManager;
     /**
-     *__construct
-     *pdo initialisation
-     *@return void
+     * __ construct
+     * pdo initialisation
+     * 
+     * @return void
      */
     public function __construct()
     {
         $this->commentManager = new CommentManager('mybolg');
     }
     /**
-     * getComments
-     *this function receives in parameter the post identifier and request the model
+     * GetComments
+     * this function receives in parameter the post identifier and request the model
      * for their validated comments
-     * @param  int $id the post identifier
+     * 
+     * @param int $id the post identifier
      *
      * @return array objects array of validated comments
      */
@@ -29,15 +31,16 @@ class CommentController
         if ($id > 0) {
             return $this->commentManager->getComments($id);
         } else {
-            require '../public/index.php?p=posts';
+            include '../public/index.php?p=posts';
         }
     }
     /**
-     * addComment
+     * AddComment
      * this function allows to add a comment
-     * @param  int $postId the post identifier
-     * @param  string $username the user identifier
-     * @param  string $content the user comment to send
+     * 
+     * @param int    $postId   the post identifier
+     * @param string $username the user identifier
+     * @param string $content  the user comment to send
      *
      * @return void
      */
