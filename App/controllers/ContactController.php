@@ -39,8 +39,9 @@ class ContactController
         $to ='allabsamir777@gmail.com';
         $subject = 'contact de mon blog';
         $message = $this->datas['message'];
+        $from=$this->datas['email'];
         $header="MIME-Version:1.0\r\n";
-        $header.= 'From :"blog.com"<'.$this->datas['email'].'>'."\n".'Répondre à : <'.$this->datas['email'].'>'."\n";
+        $header.= 'From :"blog.com"<'.$from.'>'."\n".'Répondre à : <'.$from.'>'."\n";
         $header.='Content-Type:text/html; charset="utf-8"'."/n";
         $header.='Content-Transfer-Encoding:8bit';
         'X-Mailer: PHP/' . phpversion();
