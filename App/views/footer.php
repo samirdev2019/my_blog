@@ -30,7 +30,6 @@
         <li class="nav-item">
           <a class="nav-link text-info" href="../public/index.php?p=connexion"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;se connecter</a>
         </li>
-        
       </ul>
     </div>
 
