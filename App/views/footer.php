@@ -13,7 +13,6 @@
         Copyright &copy; 2019 - ALLAB samir, Etudiant OCR
       </div>
       <div class="col-xs-4 ">
-      
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link text-info" href="../public/index.php?p=home"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Acceuil</a>
