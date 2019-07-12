@@ -62,8 +62,15 @@ switch ($page) {
             if ($id>0) {
                 $getPosts = new PostController();
                 $comments = new CommentController();
+                if (!isset($_POST['comment']) && !isset($_POST['username'])) {
+                    $succes = false;
+                }
                 if (!empty($_POST['comment']) && !empty($_POST['username'])) {
-                    $comments->addComment($_POST['id'], $_POST['username'], $_POST['comment']);
+                    $comments->
+                    addComment($_POST['id'], $_POST['username'], $_POST['comment']);
+                    $succes = true;
+                } else {
+                    $succes = false;
                 }
                 $connect = new AuthenticationService();
                 if (!$connect->isConnected()) {
@@ -71,7 +78,9 @@ switch ($page) {
                         'Post.twig',
                         ['title' => 'détail d\'article',
                         'post' => $getPosts->getPost($id),
-                        'comments' => $comments->getComments($id)]
+                        'comments' => $comments->getComments($id),
+                        'succes' => $succes,
+                        ]
                     );
                 } else {
                     echo $twig->render(
@@ -80,7 +89,8 @@ switch ($page) {
                         'title' => 'détail d\'article',
                         'post' => $getPosts->getPost($id),
                         'comments' => $comments->getComments($id),
-                        'session' => $_SESSION
+                        'session' => $_SESSION,
+                        'succes' => $succes,
                         ]
                     );
                 }

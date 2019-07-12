@@ -41,11 +41,23 @@
 
         <footer class="row my-4">
             <h3 class="col-xs-10 col-md-12 mb-3 ml-3 d-block">Laissez-nous un commentaire</h3>
+            {% if succes %}
+            <div class="alert alert-success ml-3"><p>Votre commentaire à été bien enregister, en attente de validation </p><hr></div>
+            {% else %}
+            <div class="text-info ml-3"><p>Le remplissaage de tous les champs précédés par <span class="text-danger">*</span>est obligatoire</p><hr></div>
+            {% endif %}
             <form class="col-xs-10 col-md-12 mb-3 ml-3 d-block" action="../public/index.php?" method="post">
+                {% if session %}
                 <p>
                     <label class="d-block mb-0" for="username">Votre nom</label>
+                    <input  type="text" name="username" id="username" value="{{session.username}}" readonly>
+                </p>
+                {% else %}
+                <p>
+                    <label class="d-block mb-0" for="username">Votre nom<span class="text-danger">*</span></label>
                     <input  type="text" name="username" id="username">
                 </p>  
+                {% endif %}
                 <p>
                     <label class="d-block mb-0" for="comment">Votre commentaire</label>
                     <textarea name="comment" rows="8" cols="45"></textarea>
