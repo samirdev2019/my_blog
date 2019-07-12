@@ -4,10 +4,20 @@ namespace App\models;
 class PostManager extends Database
 {
     private $db;
+    /**
+     * __construct assign value of PDO object database connection to attribute $db
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->db =$this->getPDO();
     }
+    /**
+     * The getPosts request all posts of data base
+     *
+     * @return array $datas the posts
+     */
     public function getPosts():array
     {
         $posts = $this->db->query(
@@ -18,6 +28,13 @@ class PostManager extends Database
         $datas = $posts->fetchAll(\PDO::FETCH_OBJ);
         return $datas  ;
     }
+    /**
+     * The getPost get the post from data base
+     *
+     * @param int $id post ID
+     *
+     * @return object
+     */
     public function getPost(int $id):object
     {
         $post=$this->db->prepare(
@@ -28,6 +45,13 @@ class PostManager extends Database
         $post->execute(array($id));
         return $post->fetch(\PDO::FETCH_OBJ);
     }
+    /**
+     * The addPost function allow to add post in the data base
+     *
+     * @param array $post post informations
+     *
+     * @return void
+     */
     public function addPost(array $post):void
     {
         $req=$this->db->prepare(
@@ -44,6 +68,13 @@ class PostManager extends Database
             ]
         );
     }
+    /**
+     * The updatePost allow to update the post
+     *
+     * @param array $post post informations
+     *
+     * @return bool
+     */
     public function updatePost(array $post):bool
     {
         $req=$this->db->prepare(
@@ -62,6 +93,13 @@ class PostManager extends Database
             ]
         );
     }
+    /**
+     * The deletePost allow to delete a post
+     *
+     * @param int $idPost the post id
+     *
+     * @return bool
+     */
     public function deletePost(int $idPost):bool
     {
         $req=$this->db->prepare('DELETE FROM posts WHERE post_id=:post_id');

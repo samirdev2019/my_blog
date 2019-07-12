@@ -1,9 +1,6 @@
 <?php
 namespace App\models;
 
-/**
- * this class alow a conection to database and do sommes requests
- */
 class Database
 {
     private $db_name;
@@ -12,12 +9,12 @@ class Database
     private $db_host;
     private $pdo;
     /**
-     * __construct
+     * __construct assign values to attributes
      *
-     * @param  mixed $db_name  the data base name
-     * @param  mixed $db_user  the database username
-     * @param  mixed $db_pass  the database password
-     * @param  mixed $db_host  the host
+     * @param string $db_name the data base name
+     * @param string $db_user the database username
+     * @param string $db_pass the database password
+     * @param string $db_host the host
      *
      * @return void
      */
@@ -33,7 +30,7 @@ class Database
         $this->db_host = $db_host;
     }
     /**
-     * GetPDO alow to get the PDO and initialise it only one time
+     * The getPDO allow to get the PDO and initialize it only one time
      *
      * @return objet the connection object of data base
      */

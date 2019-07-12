@@ -15,12 +15,15 @@ class RegisterController
         $this->userManager = new UserManager();
     }
     /**
-     * chekInformationPresence : this function allow
+     * The chekInformationPresence : this function allow
      *  verification of all information that comes from the user
      * 1:Is the pseudonym requested by the visitor free?
-     *  If it is already present in the database, you will have to ask the visitor to choose another one.
-     * 2:Does the e-mail address have a valid form?and is not already used by another registration!
-     * 3: Are the two passwords entered the same?    
+     *  If it is already present in the database, you will have to ask
+     *  the visitor to choose another one.
+     * 2:Does the e-mail address have a valid form?and is not already used
+     *  by another registration!
+     * 3: Are the two passwords entered the same?
+     *
      * @return array $errors: faildes that can be comitted by the user
      */
     public function chekInformationPresence():array
@@ -57,9 +60,10 @@ class RegisterController
         return $errors;
     }
     /**
-     * getHashPassword :chop the password before storing it, so that it's no longer "readable".
+     * The getHashPassword :chop the password before storing it,
+     *  so that it's no longer "readable".
      *
-     * @param  string $password
+     * @param string $password the password
      *
      * @return string $paswordhashed : the password hashed (choped)
      */
@@ -69,11 +73,12 @@ class RegisterController
         return $paswordhashed;
     }
     /**
-     * addUser : allow us to add a new user calling the function addUser of UserManager class
+     * The addUser : allow us to add a new user calling
+     * the function addUser of UserManager class
      *
-     * @param  string $username
-     * @param  string  $password
-     * @param  string $email
+     * @param string $username the username of user
+     * @param string $password the pasword of user
+     * @param string $email    the email of user
      *
      * @return void
      */

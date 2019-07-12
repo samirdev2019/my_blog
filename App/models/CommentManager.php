@@ -1,27 +1,28 @@
 <?php
 namespace App\models;
 
-//require 'Database.php';
-/**
- * this class allows to manage the comments sent by the users
- */
 class CommentManager extends Database
 {
     private $pdo;
+    /**
+     * __construct assign values to attributes
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->pdo = $this->getPDO();
     }
     /**
-     * getComments
-     *this function receives in parameter the identifier of the post and returns their validated comments
-     * @param  int $id the identifier of the post
+     * The getComments methode receives in parameter the identifier of the post
+     *  and returns their validated comments
      *
-     * @return array validated comments
+     * @param int $id the post ID
+     *
+     * @return array $comments validated comments
      */
     public function getComments(int $id):array
     {
-        
         $req=$this->pdo->prepare(
             'SELECT comment_id,content,validated,commented_by,post_id,
             date_format(commented,\' %d\%m\%Y à %Hh%imin%ss\') as coment_date
@@ -34,11 +35,11 @@ class CommentManager extends Database
         return $comments= $req->fetchAll(\PDO::FETCH_OBJ);
     }
     /**
-     * addComment
-     * this function allows to add a comment
-     * @param  int $postId
-     * @param  string $username
-     * @param  string $content
+     * The addComment method allows to add a comment
+     *
+     * @param int    $postId   the post ID
+     * @param string $username of user
+     * @param string $content  of comment
      *
      * @return boolean true if the insertion affected
      */
@@ -56,11 +57,27 @@ class CommentManager extends Database
             ]
         );
     }
+    /**
+     * The deleteComments function for delete an comment
+     *
+     * @param int $idPost the post ID
+     *
+     * @return void
+     */
     public function deleteComments(int $idPost):void
     {
         $req=$this->pdo->prepare('DELETE FROM comments WHERE post_id=?');
         $req->execute([$idPost]);
     }
+    /**
+     * The validateComment allow to validate an comment by updating the value
+     * of validated
+     *
+     * @param int $id_comment comment ID
+     * @param int $userId     user ID (admin) that validated the comment
+     *
+     * @return bool
+     */
     public function validateComment(int $id_comment, int $userId):bool
     {
         $req=$this->pdo->prepare(
@@ -74,6 +91,14 @@ class CommentManager extends Database
             ]
         );
     }
+    /**
+     * The invalidComments request from data base all comments not yet
+     * validated by the administrators
+     *
+     * @param mixed $id_post the post ID
+     *
+     * @return array
+     */
     public function invalidComments(int $id_post):array
     {
         $req=$this->pdo->prepare(

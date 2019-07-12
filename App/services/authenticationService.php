@@ -1,5 +1,4 @@
 <?php
-
 namespace App\services;
 
 use App\models\UserManager as UserManager;
@@ -8,11 +7,26 @@ class AuthenticationService
 {
     private $userManager;
 
+    /**
+     * __construct assign the new object to attribute userManager
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->userManager = new UserManager();
     }
 
+    /**
+     * The checkConnection function check user access right
+     *  if user is registred and validated a seesion will start else
+     * return an array of errors type
+     *
+     * @param string $email    of user
+     * @param string $password of user
+     *
+     * @return array $verify
+     */
     public function checkConnection(string $email, string $password):array
     {
         $user=$this->userManager->getUser($email);
@@ -34,6 +48,11 @@ class AuthenticationService
         }
         return $verify;
     }
+    /**
+     * The iSConnected verify if the user is connected
+     *
+     * @return bool
+     */
     public function iSConnected():bool
     {
         if ($_SESSION['user_id']??0 != 0) {

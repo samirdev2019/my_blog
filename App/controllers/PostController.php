@@ -7,36 +7,82 @@ use App\models\CommentManager as CommentManager;
 class PostController
 {
     private $postManager;
+    /**
+     * __construct initialization of PostManager object
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->postManager = new PostManager('myblog');
     }
     
+    /**
+     * The getListPosts allow to get a list of all posts
+     *
+     * @return array
+     */
     public function getListPosts():array
     {
         return $this->postManager->getPosts();
     }
  
+    /**
+     * The getPost allow to get a post by his ID calling the method getPost
+     * of the model PostManager
+     *
+     * @param int $id the post ID
+     *
+     * @return object
+     */
     public function getPost(int $id):object
     {
         return $this->postManager->getPost($id);
     }
- 
+    /**
+     * The addPost method call the method addPost of the model PostManager
+     * for add post in the data base
+     *
+     * @param array $post post informations
+     *
+     * @return void
+     */
     public function addPost(array $post = []):void
     {
         $this->postManager->addPost($post);
     }
     
+    /**
+     * The updatePost call the methode of the model postManager for update post
+     *
+     * @param array $post post informations
+     *
+     * @return void
+     */
     public function updatePost(array $post):void
     {
         $this->postManager->updatePost($post);
     }
   
+    /**
+     * The deletePost allow to delete an post
+     *
+     * @param int $idPost post ID
+     *
+     * @return void
+     */
     public function deletePost(int $idPost):void
     {
         $this->postManager->deletePost($idPost);
     }
     
+    /**
+     * The checkInformationPost verify the expected information from post form
+     *
+     * @param array $infoPost post informations
+     *
+     * @return bool
+     */
     public function checkInformationPost(array $infoPost):bool
     {
         if (empty($infoPost['title']) || empty($infoPost['chapo'])) {
@@ -48,6 +94,11 @@ class PostController
             return true;
         }
     }
+    /**
+     * The getTwig inicialization of Twig_Loader_Filesystem object
+     *
+     * @return object
+     */
     private function getTwig():object
     {
         $loader = new \Twig_Loader_Filesystem(
@@ -70,8 +121,9 @@ class PostController
     public function managePost(string $action, string $messageSuccess):void
     {
         $twig=$this->getTwig();
-        if (!empty($_POST) && $this->checkInformationPost($_POST)) {
-            $this->$action($_POST);
+        $info = $_POST;
+        if (!empty($info) && $this->checkInformationPost($info)) {
+            $this->$action($info);
             echo $twig->render(
                 $action.'.twig',
                 ['title' => 'account',
@@ -92,9 +144,11 @@ class PostController
         }
     }
     /**
-     * ActionToDo
+     * The actionToDo function reacts according to the action
+     * requested by the user of his account, redirecting him to the
+     * pages requested and guiding him by messages
      *
-     * @param string $action action wanted by the user;
+     * @param string $action action requested by the user ;
      * @param int    $id     post id;
      *
      * @return void
@@ -117,7 +171,6 @@ class PostController
                 echo $twig->render(
                     'ManagerPosts'.'.twig',
                     ['title' => 'account',
-                    
                     'message'=>"l'article a été bien suprimé" ,
                     'type'=> 'success',
                     'session'=> $_SESSION,
