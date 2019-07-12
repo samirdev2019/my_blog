@@ -35,7 +35,7 @@ class ContactController
      * The function chekEmail allows to check the email user presence
      * Otherwise an error will be affected in the errors array
      *
-     * @param string $mail
+     * @param string $mail eamil of user
      *
      * @return void
      */
@@ -81,12 +81,11 @@ class ContactController
         $subject = 'contact de mon blog';
         $message = $this->datas['message'];
         $from=$this->datas['email'];
-        $header="MIME-Version:1.0\r\n";
-        $header.= 'From :"blog.com"<'.htmlentities($from).'>'."\n".'Répondre à :
-         <'.htmlentities($from).'>'."\n";
-        $header.='Content-Type:text/html; charset="utf-8"'."/n";
-        $header.='Content-Transfer-Encoding:8bit';
-        'X-Mailer: PHP/' . phpversion();
+        $header = array(
+        'From' => htmlentities($from),
+        'Reply-To' => htmlentities($from),
+        'X-Mailer' => 'PHP/' . phpversion()
+         );
         $success = mail($to, $subject, $message, $header);
         if (!$success) {
             $errorMessage = error_get_last()['message'];
