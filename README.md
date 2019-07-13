@@ -1,4 +1,4 @@
-#My blog
+#My blog [![SymfonyInsight](https://insight.symfony.com/projects/e74be8a4-3513-4f26-899b-28a7d5c3d8b8/big.svg)](https://insight.symfony.com/projects/e74be8a4-3513-4f26-899b-28a7d5c3d8b8)
 
 The project is therefore to develop a professional blog. This website is divided into two large groups of pages:
 
