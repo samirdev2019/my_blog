@@ -49,7 +49,7 @@ There's no need to configure anything to run the application just for sending em
 it need to configure your SMTP in the php.ini file
 
 ### TODO 
-this project will needs somme add foctionalies in the future like as :
+this project will needs somme add foctionalities in the future like as :
 * using the categories for posts
 * add the pagination 
 * add a filter for looking posts by author, date or title
