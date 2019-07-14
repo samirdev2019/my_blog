@@ -12,21 +12,22 @@
 {% block content %}
 
 <div class="container"></div>
-<h1 class="ml-3">les derniers article</h1>
-<div class="row p-3">
+<h2 class="ml-5 text-center">Nous derniers articles</h2>
+<div class="row d-flex justify-content-center ">
     {% for post in posts %}
     
-    <div class="col-md-4 mt-3">
-        <div class="card">
-            <img src="../public/img/portfolio/fullsize/{{ loop.index }}.jpg" class="card-img-top mb-3" alt="...">
-            <div class="card-block">
-                <h4 class="card-title">{{ post.title | e }}{{ loop.index }}</h4>
-                <p>mis à jour le :{{ post.update_date }}</p>
-                <p class="card-text">{{ post.chapo }}</p>
-                <a class="btn btn-primary" href="index.php?p=post&amp;id={{ post.post_id }}" role="button">plus de détail</a>
-            </div>
+    <div class="col-sm-8 mt-4">
+      <div class="card border-info">
+          <div class="card-body">
+            <h4 class="card-title bg-light p-2">{{ post.title | e }}&nbsp;&nbsp;<small class="text-muted"> article N° :&nbsp;{{ loop.index }}</small></h4>
+              <p><small class="text-muted"><i class="fa fa-clock-o text-danger" aria-hidden="true"></i>&nbsp; mis à jour le :&nbsp;&nbsp; {{ post.update_date }}&nbsp;&nbsp;|&nbsp;&nbsp;
+                <em> <i class="fa fa-pencil-square-o text-danger" aria-hidden="true"></i>&nbsp;Auteur:&nbsp;</em> 
+                {{post.author}}</small></p>
+              <p class="card-text">{{ post.chapo }}</p>
+              <a class="btn btn-primary" href="index.php?p=post&amp;id={{ post.post_id }}" role="button">En savoir plus ...</a>
+          </div>
         </div>
-    </div>
+      </div>
     {% endfor %}
    
 </div>

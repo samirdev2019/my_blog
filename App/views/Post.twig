@@ -18,16 +18,21 @@
 <div class="container text-justify">
     <article class="row align-items-center mx-5">
         <header class="row d-block">
-            <div class=" mx-auto  mb-5 bg-secondary">
-                <img class="im-fluid"src="../public/img/portfolio/fullsize/{{ post.post_id }}.jpg"  alt="...">
-            </div>
             <div class="row">
-                <h1 class="col-xs-10 col-md-12 mb-3 ml-3 d-block">{{ post.title }}</h1>
+                <h1 class="col-xs-10 col-md-12 mb-3 ml-3 d-block text-left mt-5 mb-4">{{ post.title }}</h1>
                 <h5 class="col-xs-10 col-md-12 mb-3 ml-3 d-block">
-                    <em>mis à jour le :</em>
-                     {{post.update_date}}
-                     <em> Auteur:</em> 
+                    <small class="text-muted">
+                        <em>
+                            <i class="fa fa-clock-o text-danger" aria-hidden="true"></i>
+                            &nbsp; mis à jour le :&nbsp;&nbsp;
+                        </em>
+                     {{post.update_date}}&nbsp;&nbsp;|&nbsp;&nbsp;
+                     <em>
+                         <i class="fa fa-pencil-square-o text-danger" aria-hidden="true"></i>&nbsp;
+                         Auteur:&nbsp;&nbsp;
+                        </em> 
                      {{post.author}}
+                    </small>
                 </h5>
             </div>
             

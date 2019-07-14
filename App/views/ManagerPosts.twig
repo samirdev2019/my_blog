@@ -9,8 +9,8 @@
     <table class="table table-striped table-responsive-md">
         <thead>
             <tr>
+                <th scope="col">N° article</th>
                 <th scope="col">Titre</th>
-                <th scope="col">chapo</th>
                 <th scope="col">Auteur</th>
                 <th scope="col">modifié le</th>
             </tr>
@@ -18,8 +18,8 @@
         <tbody>
     {% for post in posts %}
             <tr>
-                <th scope="row">{{ post.title }}</th>
-                <td>{{ post.chapo }}</td>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ post.title }}</td>
                 <td>{{ post.author }}</td>
                 <td>{{ post.update_date }}</td>
                 <td><a class="btn btn-info btn-sm" href="../public/index.php?p=managePost&amp;action=posteToUpdate&amp;id={{ post.post_id }}">modifier</a></td>

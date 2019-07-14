@@ -13,27 +13,31 @@
         Copyright &copy; 2019 - ALLAB samir, Etudiant OCR
       </div>
       <div class="col-xs-4 ">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link text-info" href="../public/index.php?p=home"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Acceuil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-info" href="../public/index.php?p=posts"><i class="fa fa-clipboard" aria-hidden="true"></i>&nbsp;Blog</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-info" href="../public/index.php?p=home#contact"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-info" href="../public/index.php?p=register"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;s'inscrire</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-info" href="../public/index.php?p=connexion"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;se connecter</a>
-        </li>
-      </ul>
-    </div>
-
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link text-info" href="../public/index.php?p=home"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Acceuil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-info" href="../public/index.php?p=posts"><i class="fa fa-clipboard" aria-hidden="true"></i>&nbsp;Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-info" href="../public/index.php?p=home#contact"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-info" href="../public/index.php?p=register"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;s'inscrire</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-info" href="../public/index.php?p=connexion"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;se connecter</a>
+          </li>
+        </ul>
       </div>
+
     </div>
+    <div class="row d-flex justify-content-end">
+    <a href="#" class="hc_scrollup bg-danger p-3 " style="display: inline;">
+      <i class="fa fa-chevron-up text-white"></i>
+    </a>
+    </div>  
 
   </div>
 
