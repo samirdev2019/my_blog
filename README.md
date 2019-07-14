@@ -1,4 +1,4 @@
-#My blog [![SymfonyInsight](https://insight.symfony.com/projects/e74be8a4-3513-4f26-899b-28a7d5c3d8b8/big.svg)](https://insight.symfony.com/projects/e74be8a4-3513-4f26-899b-28a7d5c3d8b8)
+# My blog [![SymfonyInsight](https://insight.symfony.com/projects/e74be8a4-3513-4f26-899b-28a7d5c3d8b8/big.svg)](https://insight.symfony.com/projects/e74be8a4-3513-4f26-899b-28a7d5c3d8b8)
 
 The project is therefore to develop a professional blog. This website is divided into two large groups of pages:
 
@@ -6,7 +6,7 @@ The project is therefore to develop a professional blog. This website is divided
 >a visitor can see the list of posts, by consulting and leaving a comment, this latter is visible on the detail of the article only if it is validated by an administrator.
 * pages to administer the blog.
 >an administration part which will have to be accessible only to the registered and validated users.
-##Requirements
+## Requirements
 My blog require 
 - ``PHP 7.2.10 or an version ulterieure to run``
 - ``MySql 5.7.23``
@@ -15,7 +15,7 @@ My blog require
 v2.7``https://twig.symfony.com/
 - ``Bootstrap 4.3.1`` 
 
-##Installation
+## Installation
 * Install [composer] the Dependency Manager for PHP https://getcomposer.org/
 `Latest: v1.8.6`
  
@@ -37,7 +37,7 @@ v2.7``https://twig.symfony.com/
 
 
 
-###usage
+### usage
 if you use the apach server in your machine, or a development environement in local like as wampserver or easyPHP copy the the project in your dossier racin WWW and request the public folder,
 or you can use the server php, in your terminal tape 
 >$ $ cd ~/public_html
@@ -48,6 +48,10 @@ send email
 There's no need to configure anything to run the application just for sending email
 it need to configure your SMTP in the php.ini file
 
-
+### TODO 
+this project will needs somme add foctionalies in the future like as :
+* using the categories for posts
+* add the pagination 
+* add a filter for looking posts by author, date or title
 
 
