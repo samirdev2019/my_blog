@@ -17,9 +17,9 @@ $twig = new Twig_Environment(
     ['cache' => false]
 );
 $page = 'home';
-$urlGet = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_SPECIAL_CHARS);
-if (isset($url)) {
-    $page = $url;
+
+if (isset($_GET['p'])) {
+    $page = $_GET['p'];
 } elseif (isset($_POST['p'])) {
     $page = $_POST['p'];
 }
