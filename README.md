@@ -43,6 +43,11 @@ or you can use the server php, in your terminal tape
 >$ $ cd ~/public_html
 >$ php -S localhost:8000 
 
+* for the first test you can use this parameters for connecting like admin
+
+email : admin@gmail.com
+password : azerty
+
 send email
 
 There's no need to configure anything to run the application just for sending email
